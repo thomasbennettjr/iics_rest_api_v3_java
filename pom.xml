@@ -6,7 +6,7 @@
 
     <groupId>com.metaopsis</groupId>
     <artifactId>icsapi.v3</artifactId>
-    <version>33.0.0</version>
+    <version>31.0.0</version>
     <build>
         <plugins>
             <plugin>

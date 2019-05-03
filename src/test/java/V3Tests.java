@@ -8,8 +8,8 @@ import java.io.File;
 
 public class V3Tests {
 
-    private String username = "tbennett@unicosolution.com";
-    private String password = "Lak3v13w.c0M";
+    private String username = "";
+    private String password = "";
 
     @Test
     public void LoginTest() {
@@ -120,12 +120,12 @@ public class V3Tests {
             } while(status.getStatus().getState().equals("IN_PROGRESS"));
 
 
-            exportService.statusLog(startResponse.getId(), new File("/Users/thomasbennett/V3/"+jobName+".txt"));
+            exportService.statusLog(startResponse.getId(), new File("/test/V3/"+jobName+".txt"));
 
 
             if (status.getStatus().getState().equals("SUCCESSFUL"))
             {
-                exportService.download(startResponse.getId(), new File("/Users/thomasbennett/V3/"+jobName+".zip"));
+                exportService.download(startResponse.getId(), new File("/test/V3/"+jobName+".zip"));
             }
 
             LogoutService logoutService = new LogoutService(Url.LOGOUT_NA);
@@ -141,13 +141,13 @@ public class V3Tests {
     public void ImportTest()
     {
         try {
-            Credentials credentials = new Credentials("tbennett@unicosolution.app.com", "Lak3v13w.c0m");
+            Credentials credentials = new Credentials("", "");
             LoginService loginService = new LoginService(Url.LOGIN_NA);
             User user = loginService.login(credentials);
 
 
             ImportService importService = new ImportService(user);
-            ImportUploadResponse importUploadResponse = importService.upload(new File("/Users/thomasbennett/V3/testExport1-7c2e58a3-bc8d-4be1-83da-5688f57f404b.zip"), true);
+            ImportUploadResponse importUploadResponse = importService.upload(new File("/test/V3/testExport1-7c2e58a3-bc8d-4be1-83da-5688f57f404b.zip"), true);
 
             StartResponse startResponse = importService.start(importUploadResponse.getJobId());
 
@@ -157,7 +157,7 @@ public class V3Tests {
                 importStatusResponse = importService.status(startResponse.getId(), false);
             } while(importStatusResponse.getStatus().getState().equals("IN_PROGRESS"));
 
-            importService.getStatusLog(startResponse.getId(), new File("/Users/thomasbennett/V3/" + startResponse.getName() + ".log"));
+            importService.getStatusLog(startResponse.getId(), new File("/test/V3/" + startResponse.getName() + ".log"));
 
 
 

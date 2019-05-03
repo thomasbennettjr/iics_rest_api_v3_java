@@ -1,5 +1,5 @@
-import com.metaopsis.icsapi.dom.*;
-import com.metaopsis.icsapi.services.*;
+import com.metaopsis.icsapi.v3.dom.*;
+import com.metaopsis.icsapi.v3.services.*;
 import org.junit.Test;
 
 import java.util.ArrayList;

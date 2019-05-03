@@ -38,12 +38,12 @@ public class ImportService {
         this.rest.setErrorHandler(new CustomResponseErrorHandler());
     }
 
-    public ImportUploadResponse upload(File file, boolean relaxChecksum) throws InformaticaCloudException
+    public UploadResponse upload(File file, boolean relaxChecksum) throws InformaticaCloudException
     {
         logger.info(this.getClass().getName()+"::upload::enter");
         if (!file.exists())
             throw new InformaticaCloudException("File " + file.getAbsolutePath() + " cannot be found!");
-        ImportUploadResponse response;
+        UploadResponse response;
         try {
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("package", new FileSystemResource(file));
@@ -58,7 +58,7 @@ public class ImportService {
             logger.info("Informatica Cloud V3 Import Upload " + responseEntity.getStatusCode().toString());
             if (responseEntity.getStatusCode().is2xxSuccessful())
             {
-                response = mapper.readValue(responseEntity.getBody(), ImportUploadResponse.class);
+                response = mapper.readValue(responseEntity.getBody(), UploadResponse.class);
             } else {
                 throw new InformaticaCloudException("Package Upload Failed");
             }
@@ -76,7 +76,7 @@ public class ImportService {
             return this.start(id, null);
     }
 
-    public StartResponse start(String id, ImportStartRequest request) throws InformaticaCloudException
+    public StartResponse start(String id, StartRequest request) throws InformaticaCloudException
     {
         logger.info(this.getClass().getName()+"::start::enter");
         HttpEntity<String> requestEntity = null;
@@ -108,13 +108,13 @@ public class ImportService {
         return response;
     }
 
-    public ImportStatusResponse status(String id, boolean showDetail) throws InformaticaCloudException
+    public StatusResponse status(String id, boolean showDetail) throws InformaticaCloudException
     {
         logger.info(this.getClass().getName()+"::status::enter");
 
         HttpEntity<String> requestEntity = null;
         ResponseEntity<String> responseEntity = null;
-        ImportStatusResponse response = null;
+        StatusResponse response = null;
         try {
             requestEntity = new HttpEntity<String>("", this.buildHttpHeaders("application/json", "application/json"));
 
@@ -122,7 +122,7 @@ public class ImportService {
 
             logger.info("Informatica Cloud V3 Import Status " + responseEntity.getStatusCode().toString());
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                response = mapper.readValue(responseEntity.getBody(), ImportStatusResponse.class);
+                response = mapper.readValue(responseEntity.getBody(), StatusResponse.class);
             } else {
                 logger.error(responseEntity.toString());
                 throw new InformaticaCloudException(responseEntity.toString());

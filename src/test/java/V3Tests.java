@@ -98,15 +98,15 @@ public class V3Tests {
 
             Lookup lookup1 = lookupService.doLookup(lookup);
 
-            ArrayList<ExportObject> exportObjects = new ArrayList<>();
+            ArrayList<RequestObject> requestObjects = new ArrayList<>();
             for (object obj : lookup1.getObjects()) {
-                exportObjects.add(new ExportObject(obj.getId(),false));
+                requestObjects.add(new RequestObject(obj.getId(),false));
             }
 
             ExportRequest exportRequest = new ExportRequest();
             String jobName = "testExport1-" + UUID.randomUUID().toString();
             exportRequest.setName(jobName);
-            exportRequest.setObjects(exportObjects.toArray(new ExportObject[0]));
+            exportRequest.setObjects(requestObjects.toArray(new RequestObject[0]));
 
             ExportService exportService = new ExportService(user);
             StartResponse startResponse = exportService.start(exportRequest);
@@ -147,15 +147,15 @@ public class V3Tests {
 
 
             ImportService importService = new ImportService(user);
-            ImportUploadResponse importUploadResponse = importService.upload(new File("/test/V3/testExport1-7c2e58a3-bc8d-4be1-83da-5688f57f404b.zip"), true);
+            UploadResponse uploadResponse = importService.upload(new File("/test/V3/testExport1-7c2e58a3-bc8d-4be1-83da-5688f57f404b.zip"), true);
 
-            StartResponse startResponse = importService.start(importUploadResponse.getJobId());
+            StartResponse startResponse = importService.start(uploadResponse.getJobId());
 
-            ImportStatusResponse importStatusResponse = null;
+            StatusResponse statusResponse = null;
             do {
                 Thread.sleep(5000);
-                importStatusResponse = importService.status(startResponse.getId(), false);
-            } while(importStatusResponse.getStatus().getState().equals("IN_PROGRESS"));
+                statusResponse = importService.status(startResponse.getId(), false);
+            } while(statusResponse.getStatus().getState().equals("IN_PROGRESS"));
 
             importService.getStatusLog(startResponse.getId(), new File("/test/V3/" + startResponse.getName() + ".log"));
 

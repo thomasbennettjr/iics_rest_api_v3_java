@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ExportRequest {
     private String name;
-    private ExportObject[] objects;
+    private RequestObject[] objects;
 
 
     public ExportRequest() {
@@ -23,11 +23,11 @@ public class ExportRequest {
         this.name = name;
     }
 
-    public ExportObject[] getObjects() {
+    public RequestObject[] getObjects() {
         return objects;
     }
 
-    public void setObjects(ExportObject[] objects) {
+    public void setObjects(RequestObject[] objects) {
         this.objects = objects;
     }
 

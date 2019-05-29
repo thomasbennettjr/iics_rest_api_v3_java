@@ -141,13 +141,13 @@ public class V3Tests {
     public void ImportTest()
     {
         try {
-            Credentials credentials = new Credentials("", "");
+            Credentials credentials = new Credentials("tbennett@unicosolution.app.com", "Lak3v13w.c0m");
             LoginService loginService = new LoginService(Url.LOGIN_NA);
             User user = loginService.login(credentials);
 
 
             ImportService importService = new ImportService(user);
-            UploadResponse uploadResponse = importService.upload(new File("/test/V3/testExport1-7c2e58a3-bc8d-4be1-83da-5688f57f404b.zip"), true);
+            UploadResponse uploadResponse = importService.upload(new File("/Users/thomasbennett/Downloads/Metaopsis/Archive.zip"), true);
 
             StartResponse startResponse = importService.start(uploadResponse.getJobId());
 
@@ -157,7 +157,7 @@ public class V3Tests {
                 statusResponse = importService.status(startResponse.getId(), false);
             } while(statusResponse.getStatus().getState().equals("IN_PROGRESS"));
 
-            importService.getStatusLog(startResponse.getId(), new File("/test/V3/" + startResponse.getName() + ".log"));
+            importService.getStatusLog(startResponse.getId(), new File("/Users/thomasbennett/Downloads/Metaopsis/" + startResponse.getName() + ".log"));
 
 
 

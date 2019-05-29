@@ -2,7 +2,7 @@ package com.metaopsis.icsapi.v3.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.metaopsis.icsapi.dom.*;
+
 import com.metaopsis.icsapi.v3.dom.ObjectResponse;
 import com.metaopsis.icsapi.v3.dom.Query;
 import com.metaopsis.icsapi.v3.dom.User;

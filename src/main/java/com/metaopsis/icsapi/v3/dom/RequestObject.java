@@ -6,6 +6,12 @@ public class RequestObject {
 
     public RequestObject() {}
 
+    public RequestObject(String id)
+    {
+        this.id = id;
+        this.includeDependencies = true;
+    }
+
     public RequestObject(String id, boolean includeDependencies) {
         this.id = id;
         this.includeDependencies = includeDependencies;

@@ -2,7 +2,6 @@ package com.metaopsis.icsapi.v3.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.metaopsis.icsapi.dom.*;
 import com.metaopsis.icsapi.v3.dom.*;
 import org.apache.log4j.Logger;
 import org.springframework.core.io.FileSystemResource;
@@ -61,7 +60,7 @@ public class ImportService {
             {
                 response = mapper.readValue(responseEntity.getBody(), UploadResponse.class);
             } else {
-                throw new InformaticaCloudException("Package Upload Failed");
+                throw new InformaticaCloudException(responseEntity.getBody());
             }
 
         } catch(Exception e) {

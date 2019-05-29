@@ -25,5 +25,5 @@ hs_err_pid*
 # Intellij
 .idea
 
-src/test/*
+test/
 target/
